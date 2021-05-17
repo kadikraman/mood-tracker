@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-export const HomeTabSecondPage = () => {
+export const HistoryTab = () => {
   return (
     <View style={styles.container}>
-      <Text>Second Page</Text>
+      <Text>History Tab</Text>
     </View>
   );
 };

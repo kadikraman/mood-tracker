@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-export const OtherTab = () => {
+export const HomeTab = () => {
   return (
     <View style={styles.container}>
-      <Text>Other Bottom Tab</Text>
+      <Text>Home Tab</Text>
     </View>
   );
 };

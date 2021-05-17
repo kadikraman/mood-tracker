@@ -6,11 +6,7 @@ export type RootStackParamList = {
 };
 
 export type BottomTabsParamList = {
-  HomeTab: NavigatorScreenParams<HomeStackParamList>;
-  OtherTab: undefined;
-};
-
-export type HomeStackParamList = {
-  FirstPage: undefined;
-  SecondPage: undefined;
+  HomeTab: undefined;
+  HistoryTab: undefined;
+  AnalyticsTab: undefined;
 };
