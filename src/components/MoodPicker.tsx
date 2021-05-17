@@ -10,8 +10,34 @@ const moodOptions = [
   { emoji: '😔', description: 'miserable' },
 ];
 
-export const MoodPicker = () => {
+type MoodPickerProps = {
+  onAddMood: (newMood: MoodOption) => void;
+};
+
+export const MoodPicker: React.FC<MoodPickerProps> = ({ onAddMood }) => {
   const [selectedOption, setSelectedOption] = useState<MoodOption>();
+  const [hasAdded, setHasAdded] = useState(false);
+
+  const handleAddMood = React.useCallback(() => {
+    if (selectedOption) {
+      setHasAdded(true);
+      onAddMood(selectedOption);
+      setSelectedOption(undefined);
+    }
+  }, [onAddMood, selectedOption]);
+
+  if (hasAdded) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.titleText}>Thank you!</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setHasAdded(false)}>
+          <Text style={styles.buttonText}>Add another</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -37,7 +63,7 @@ export const MoodPicker = () => {
           </View>
         ))}
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleAddMood}>
         <Text style={styles.buttonText}>Choose</Text>
       </TouchableOpacity>
     </View>
@@ -60,7 +86,7 @@ const styles = StyleSheet.create({
   emojiList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
+    marginBottom: 10,
   },
   moodItem: {
     width: 50,
@@ -85,6 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#454C73',
+    marginBottom: 10,
   },
   button: {
     backgroundColor: '#8D94BA',

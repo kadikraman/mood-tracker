@@ -15,3 +15,8 @@ export type MoodOption = {
   emoji: string;
   description: string;
 };
+
+export type MoodOptionWithTimestamp = {
+  moodOption: MoodOption;
+  timestamp: number;
+};
