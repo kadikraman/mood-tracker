@@ -14,29 +14,46 @@ export const MoodPicker = () => {
   const [selectedOption, setSelectedOption] = useState<MoodOption>();
 
   return (
-    <View style={styles.emojiList}>
-      {moodOptions.map(option => (
-        <View>
-          <TouchableOpacity
-            onPress={() => setSelectedOption(option)}
-            style={[
-              styles.moodItem,
-              option.emoji === selectedOption?.emoji
-                ? styles.selected
-                : undefined,
-            ]}>
-            <Text style={styles.emojiText}>{option.emoji}</Text>
-          </TouchableOpacity>
-          <Text style={styles.descriptionText}>
-            {option.emoji === selectedOption?.emoji ? option.description : null}
-          </Text>
-        </View>
-      ))}
+    <View style={styles.container}>
+      <Text style={styles.titleText}>How are you right now?</Text>
+      <View style={styles.emojiList}>
+        {moodOptions.map(option => (
+          <View>
+            <TouchableOpacity
+              onPress={() => setSelectedOption(option)}
+              style={[
+                styles.moodItem,
+                option.emoji === selectedOption?.emoji
+                  ? styles.selected
+                  : undefined,
+              ]}>
+              <Text style={styles.emojiText}>{option.emoji}</Text>
+            </TouchableOpacity>
+            <Text style={styles.descriptionText}>
+              {option.emoji === selectedOption?.emoji
+                ? option.description
+                : null}
+            </Text>
+          </View>
+        ))}
+      </View>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Choose</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    borderWidth: 2,
+    borderColor: '#8D94BA',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    backgroundColor: '#D5EAEC',
+    marginHorizontal: 10,
+  },
   emojiText: {
     fontSize: 24,
   },
@@ -62,5 +79,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 10,
     textAlign: 'center',
+  },
+  titleText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#454C73',
+  },
+  button: {
+    backgroundColor: '#8D94BA',
+    borderRadius: 50,
+    padding: 10,
+    width: 150,
+    alignSelf: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
