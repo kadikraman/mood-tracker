@@ -10,3 +10,8 @@ export type BottomTabsParamList = {
   HistoryTab: undefined;
   AnalyticsTab: undefined;
 };
+
+export type MoodOption = {
+  emoji: string;
+  description: string;
+};

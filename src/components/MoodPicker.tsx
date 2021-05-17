@@ -1,5 +1,6 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { MoodOption } from '~src/types';
 
 const moodOptions = [
   { emoji: '😄', description: 'amazing' },
@@ -10,10 +11,26 @@ const moodOptions = [
 ];
 
 export const MoodPicker = () => {
+  const [selectedOption, setSelectedOption] = useState<MoodOption>();
+
   return (
     <View style={styles.emojiList}>
       {moodOptions.map(option => (
-        <Text style={styles.emojiText}>{option.emoji}</Text>
+        <View>
+          <TouchableOpacity
+            onPress={() => setSelectedOption(option)}
+            style={[
+              styles.moodItem,
+              option.emoji === selectedOption?.emoji
+                ? styles.selected
+                : undefined,
+            ]}>
+            <Text style={styles.emojiText}>{option.emoji}</Text>
+          </TouchableOpacity>
+          <Text style={styles.descriptionText}>
+            {option.emoji === selectedOption?.emoji ? option.description : null}
+          </Text>
+        </View>
       ))}
     </View>
   );
@@ -27,5 +44,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 20,
+  },
+  moodItem: {
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selected: {
+    borderWidth: 2,
+    backgroundColor: '#A0CFD3',
+    borderColor: '#8D94BA',
+    borderRadius: 100,
+  },
+  descriptionText: {
+    color: '#454C73',
+    fontWeight: 'bold',
+    fontSize: 10,
+    textAlign: 'center',
   },
 });
