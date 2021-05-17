@@ -44,7 +44,7 @@ export const MoodPicker: React.FC<MoodPickerProps> = ({ onAddMood }) => {
       <Text style={styles.titleText}>How are you right now?</Text>
       <View style={styles.emojiList}>
         {moodOptions.map(option => (
-          <View>
+          <View key={option.emoji}>
             <TouchableOpacity
               onPress={() => setSelectedOption(option)}
               style={[
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     backgroundColor: '#D5EAEC',
     marginHorizontal: 10,
+    marginBottom: 10,
   },
   emojiText: {
     fontSize: 24,

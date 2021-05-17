@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { MoodItemRow } from '~src/components/MoodItemRow';
 import { MoodPicker } from '~src/components/MoodPicker';
 import { MoodOptionWithTimestamp } from '~src/types';
 
@@ -17,9 +18,7 @@ export const HomeTab = () => {
     <View style={styles.container}>
       <MoodPicker onAddMood={handleAddMood} />
       {moodList.map(mood => (
-        <Text style={styles.emoji}>
-          {mood.moodOption.emoji} {new Date(mood.timestamp).toString()}
-        </Text>
+        <MoodItemRow item={mood} key={mood.timestamp} />
       ))}
     </View>
   );
@@ -29,8 +28,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-  },
-  emoji: {
-    textAlign: 'center',
   },
 });
