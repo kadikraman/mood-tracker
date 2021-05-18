@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, LayoutAnimation } from 'react-native';
 import format from 'date-fns/format';
 import { MoodOptionWithTimestamp } from '~src/types';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,15 +12,20 @@ import Animated, {
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
+  PanGestureHandlerStateChangeEvent,
+  State as GestureState,
 } from 'react-native-gesture-handler';
 
 type MoodItemRowProps = {
   item: MoodOptionWithTimestamp;
 };
 
+const maxPan = 80;
+
 export const MoodItemRow: React.FC<MoodItemRowProps> = ({ item }) => {
   const { handleRemoveMood } = useAppContext();
   const offset = useSharedValue(0);
+  const [shouldRemove, setShouldRemove] = React.useState(false);
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateX: offset.value }],
@@ -31,13 +36,32 @@ export const MoodItemRow: React.FC<MoodItemRowProps> = ({ item }) => {
       const xVal = Math.floor(event.nativeEvent.translationX);
 
       offset.value = xVal;
+
+      if (Math.abs(xVal) <= maxPan) {
+        setShouldRemove(false);
+      } else {
+        setShouldRemove(true);
+      }
     },
     [offset],
   );
 
-  const onHandlerStateChange = React.useCallback(() => {
-    offset.value = withTiming(0);
-  }, [offset]);
+  const onHandlerStateChange = React.useCallback(
+    (event: PanGestureHandlerStateChangeEvent) => {
+      if (event.nativeEvent.state === GestureState.END) {
+        if (shouldRemove) {
+          offset.value = withTiming(Math.sign(offset.value) * 2000);
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+          setTimeout(() => {
+            handleRemoveMood(item);
+          }, 250);
+        } else {
+          offset.value = withTiming(0);
+        }
+      }
+    },
+    [handleRemoveMood, item, offset, shouldRemove],
+  );
 
   return (
     <PanGestureHandler
