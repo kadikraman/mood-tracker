@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   descriptionText: {
     color: '#454C73',
     fontSize: 10,
+    height: 15,
     textAlign: 'center',
     fontFamily: 'Kalam-Light',
   },
