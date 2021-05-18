@@ -7,6 +7,7 @@ import groupBy from 'lodash/groupBy';
 import { format } from 'date-fns';
 import { FlatList } from 'react-native-gesture-handler';
 import { MoodOptionWithTimestamp } from '~src/types';
+import { Drawer } from '~src/components/Drawer';
 
 export const HistoryTab = () => {
   const { moodList } = useAppContext();
@@ -29,12 +30,11 @@ export const HistoryTab = () => {
       keyExtractor={item => item.day}
       data={days}
       renderItem={({ item }) => (
-        <View>
-          <Text>{item.day}</Text>
+        <Drawer title={item.day}>
           {item.moodsInDay.map((mood: MoodOptionWithTimestamp) => (
             <MoodItemRow item={mood} key={mood.timestamp} />
           ))}
-        </View>
+        </Drawer>
       )}
     />
   );
