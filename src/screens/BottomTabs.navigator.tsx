@@ -14,6 +14,7 @@ export const BottomTabsNavigator: React.FC = () => {
   return (
     <BottomTabs.Navigator
       screenOptions={({ route }) => ({
+        headerTitleStyle: { fontFamily: 'Kalam-Bold' },
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#1D84B5',
         tabBarInactiveTintColor: '#8E9AAF',

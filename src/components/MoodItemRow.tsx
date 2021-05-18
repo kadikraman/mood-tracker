@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   moodDate: {
     textAlign: 'center',
     color: '#87677B',
+    fontFamily: 'Kalam-Regular',
   },
   moodItem: {
     backgroundColor: 'white',
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   moodDescription: {
     fontSize: 18,
     color: '#454C73',
-    fontWeight: 'bold',
+    fontFamily: 'Kalam-Bold',
   },
   iconAndDescription: {
     flexDirection: 'row',

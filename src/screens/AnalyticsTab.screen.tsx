@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 export const AnalyticsTab = () => {
   return (
     <View style={styles.container}>
-      <Text>Analytics Tab</Text>
+      <Text style={styles.text}>Analytics Tab</Text>
     </View>
   );
 };
@@ -14,5 +14,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  text: {
+    fontFamily: 'Kalam',
   },
 });

@@ -103,16 +103,16 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: '#454C73',
-    fontWeight: 'bold',
     fontSize: 10,
     textAlign: 'center',
+    fontFamily: 'Kalam-Light',
   },
   titleText: {
     textAlign: 'center',
     fontSize: 18,
-    fontWeight: 'bold',
     color: '#454C73',
     marginBottom: 10,
+    fontFamily: 'Kalam-Bold',
   },
   button: {
     backgroundColor: '#8D94BA',
@@ -124,6 +124,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontFamily: 'Kalam-Bold',
   },
 });
